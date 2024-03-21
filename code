@@ -32,9 +32,9 @@ void init_PWM()
 	while (1) 
     {
 		OCR1A = 30;
-		_delay_ms(50000);
+		_delay_ms(500);
 		OCR1A = 160;
-		_delay_ms(50000);
+		_delay_ms(500);
 		
     }
 }

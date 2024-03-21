@@ -1,0 +1,41 @@
+/*
+ * PWM_GEN.cpp
+ *
+ * Created: 01.03.2024 13:49:39
+ * Author : Adrian Ciorita
+ */ 
+
+//OCR1=30-0 grade---OCR1=160-180 grade
+//De ce nu functioneaza exact dupa 1ms, 1.5 ms si 2ms ???
+ 
+#include <avr/io.h>
+#include <avr/interrupt.h>
+#include <util/delay.h>
+
+#define F_CPU 16000000
+
+
+void init_PWM()
+{
+	 TCCR1A = (1<<COM1A1) | (1<<WGM11);
+	 TCCR1B = (1<<WGM13) | (1<<WGM12) | (1<<CS12);
+	 ICR1 = 1249;
+	 OCR1A = 30;
+}
+
+		
+  int main(void)
+{
+	DDRB = (1 << 1);
+	
+	init_PWM();
+	while (1) 
+    {
+		OCR1A = 30;
+		_delay_ms(50000);
+		OCR1A = 160;
+		_delay_ms(50000);
+		
+    }
+}
+
